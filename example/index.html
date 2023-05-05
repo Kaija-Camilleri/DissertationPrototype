@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="Description" content="A simple color quantization algorithm using k-means clustering">
+		<link rel="stylesheet" href="https://unpkg.com/picnic">
+		<link rel="stylesheet" href="CSS/style.css"/>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Sora" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Trirong" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Heebo&display=swap" rel="stylesheet" />
+
+
+		<script type="text/javascript" src="../src/kmeans-quantizer.js"></script>
+		<script type="text/javascript" src="example.js" defer></script>
+
+		<title> Brand </title>
+	</head>
+
+	<body id="container">
+		<header>
+			<button id="hamburger">
+				<img class="hamburger" src="Resources/hamburger.png" alt="hamburger_menu" />
+			</button>
+			<img class="logo" src="Resources/LogoBackground.svg" alt="logo" />
+			
+		</header>
+
+		<div class="clear"></div>
+
+		<main>
+			<section class="one">
+				<h1>
+					Ready for some top-notch Branding?
+				</h1>
+				<h3>
+					Brand is here to generate high quality branding guidelines for you. <br/>
+					We will ask you some questions and generate branding guidelines that suite your brand perfectly. <br/>
+					Follow the steps and enjoy the ride. 
+				</h3>
+
+				<div>
+					<form id="myForm" action="#">
+						<h2>
+							Step 1: Answer
+						</h2>
+
+						<label for="company_name"> What is the name of your company? </label> <br/>
+						<input type="text" name="company_name" id="company_name" placeholder="Enter your company's name" /> 
+						<br/>
+
+						<label for="industry_type"> What is your industry? </label> <br/>
+						<select name="industry_type" id="industry_type">
+							<option value="none"> None </option>
+							<option value="bookPublisher"> Book Publisher </option>
+							<option value="affiliated"> Affiliated </option>
+							<option value="architecture"> Architecture </option>
+							<option value="crypto"> Crypto </option>
+							<option value="dentistClinic"> Dentist Clinic </option>
+							<option value="diving"> Diving </option>
+							<option value="engineering"> Engineering </option>
+							<option value="furnitureShop"> Furniture Shop </option>
+							<option value="hotel"> Hotel </option>
+						</select>
+						<br/>
+
+						<label for="company_attributes"> Which attribute best describes your company? </label> <br/>
+						<select name="company_attributes" id="company_attributes">
+							<option value="none"> None </option>
+							<option value="active"> Active </option>
+							<option value="bright"> Bright </option>
+							<option value="creative"> Creative </option>
+							<option value="determined"> Determined </option>
+							<option value="enthusiastic"> Enthusiastic </option>
+							<option value="fresh"> Fresh </option>
+							<option value="genuine"> Genuine </option>
+							<option value="helpful"> Helpful </option>
+							<option value="innovative"> Innovative </option>
+							<option value="joyful"> Joyful </option>
+							<option value="kind"> Kind </option>
+							<option value="mindful"> Mindful </option>
+							<option value="natural"> Natural </option>
+							<option value="open"> Open </option>
+							<option value="positive"> Positive </option>
+							<option value="quirky"> Quirky </option>
+							<option value="responsable"> Responsable </option>
+							<option value="secure"> Secure </option>
+							<option value="thoughtful"> Thoughtful </option>
+							<option value="versatile"> Versatile </option>
+							<option value="whimsical"> Whimsical </option>
+							<option value="youthful"> Youthful </option>
+						</select>
+
+						<h2>
+							Step 2: Choose/ Upload and Submit
+						</h2>
+		
+						<p> Drag and Drop an image from our libabry or Upload an image you like. Hit the 'Submit' button. 
+							The colours shown after quantization will be your colour scheme, so choose wisely. </p>
+							<br/>
+
+						<label for="image_library"> What kind mood are you looking for? </label> <br/>
+						<select name="image_library" id="image_library">
+							<option value="upload"> I want to upload my own image </option>
+							<option value="dark"> Dark </option>
+							<option value="bright"> Bright </option>
+							<option value="pastel"> Pastel </option>
+							<option value="nature"> Nature </option>
+						</select>
+						<div id="library" style="display: flex; width: 100%;"></div>
+						
+						<div class="flex twelve center" style="padding:60px 10px 10px">
+							<div class="two-fifth-800 four-fifth">
+								<div class="flex one center">
+									<h4 class="">Drag & Drop | Click</h4>
+									<div class="two-fifth">
+										<label class="dropimage">
+											<input title="Drop an image or click me" type="file" id="file_input">
+										</label>
+									</div>
+								</div>
+					
+								<div class="flex one grow">
+									<form>
+										<label style="display:none;" class="half"> Number of Colours </label>
+										<input style="display:none;" type="number" name="configuration" id="color_count" class="half" value=4 min=4 max=4 step=1>
+									</form>
+								</div>
+					
+								<div class="flex twelve center" style="display: none;">
+									<button class="half" id="reset_button" >Reset Image</button>
+								</div>
+							</div>
+					
+							<div class="two-fifth-1200 three-fifth-800 four-fifth">
+								<canvas width="800" height="600" id="canvas" style="width: 100%; height: auto;"></canvas>
+								<div class="flex twelve center">
+									<button class="two-fifth" id="button">Submit</button>
+								</div>
+							</div>
+						</div>
+
+						<button style="display: none;" class="submit" id="submit" type="submit">Submit</button>
+					</form>
+				</div>
+			</section>
+
+			<section id="two">
+				<h4>
+					Let us start with typography
+				</h4>
+				<p> We think the best typography that suits your brand is...</p><p id="typography"></p>
+				<p style="margin-top: 10px;"> Check out these examples to see how the font looks </p>
+				<div id="fontStyles">
+					<p id="example1" style="font-size: 45px; margin-right: 20px;">Heading 45px</p>
+					<p id="example3" style="font-size: 30px; margin-right: 20px;">Subheading 30px</p>
+					<p id="example4" style="font-size: 20px; margin-right: 20px;">Subtitle 20px</p>
+					<p id="example5" style="font-size: 18px; margin-right: 20px;">Paragraph 18px</p>
+					<p id="example6" style="font-size: 12px; margin-right: 20px;">Small Text 12px</p>
+				</div>
+
+				<h4>
+					Moving on to your style
+				</h4>
+				<p> The ideal style for your industry is...</p>
+				<p id="cta"></p>
+				<p style="margin-top: 10px;"> These are how your CTA could look like in your website </p>
+				<div id="ctaStyle">
+					<button id="button1" style="height: 50px; width: 100px; margin-right: 20px;"> CTA </button>
+					<button id="button2" style="height: 50px; width: 100px;"> CTA </button>
+				</div>
+				
+
+				<h4>
+					The part we have all been waiting for
+				</h4>
+				<p> These are the colours we have extracted from your uploaded image.
+					These colours will serve as your brand colour scheme</p>
+				
+				<div id="palette"></div>
+
+				<br/>
+				<br/>
+				<br/>
+
+				<h4>
+					Finally, the layout
+				</h4>
+			<p> Here is a low-fidelity layout of a Home page to show you how your sections
+				may look, and to show you the typography and style in action. 
+				This Home page is also inline with your chosen industry.</p>
+				<img id="designImg" src=""/>
+			</section>
+		</main>
+		<script src="Scripts/script.js"></script>
+	</body>
+	<div class="clear"></div>
+	
+	<footer> 
+        <img class="footerLogo" src="Resources/Logo.svg" alt="logo" />
+        <p>&copy; 2023 Brand</p>
+    </footer>
+</html>
